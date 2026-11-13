@@ -36,6 +36,21 @@ jobs:
           sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
           yes | sdkmanager --licenses || true
 
+      - name: Prepare www directory
+        run: |
+          mkdir -p www
+          cp index.html www/ || true
+          cp -r assets www/ 2>/dev/null || true
+          cp -r css www/ 2>/dev/null || true
+          cp -r js www/ 2>/dev/null || true
+          cp -r img www/ 2>/dev/null || true
+          cp -r images www/ 2>/dev/null || true
+          cp *.js www/ 2>/dev/null || true
+          cp *.css www/ 2>/dev/null || true
+          cp *.svg www/ 2>/dev/null || true
+          cp manifest.webmanifest www/ 2>/dev/null || true
+          ls -la www/
+
       - name: Build web assets
         run: npm run build || echo "No build script, skipping"
 
